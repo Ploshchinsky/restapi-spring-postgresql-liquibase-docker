@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: restapi-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/wallet_db
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+
+  db:
+    container_name: postgres
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      -d postgres: 13.3
+      POSTGRES_DB: wallet_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin

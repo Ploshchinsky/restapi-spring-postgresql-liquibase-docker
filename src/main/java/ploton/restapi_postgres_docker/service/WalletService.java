@@ -25,7 +25,7 @@ public class WalletService {
             throws InsufficientResourcesException {
         //Check the wallet exist and get its balance
         Wallet wallet = walletRepository
-                .findById(walletID)
+                .findByIdForUpdate(walletID)
                 .orElseThrow(() -> new NoSuchElementException("Wallet not found"));
         BigDecimal currentBalance = wallet.getBalance();
         Transaction transaction = new Transaction();
